@@ -1,0 +1,54 @@
+<h1 mat-dialog-title>Create a new container</h1>
+<p style="margin-top:-25px;">Using the image: {{data.configJson.Image}}</p>
+
+<div mat-dialog-content>
+
+  <span>Container name: </span><br>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.containerName">
+  </mat-form-field>
+  <br>
+
+  <!--<span>Command: </span><br>-->
+  <!--<mat-form-field>-->
+    <!--<textarea matInput [(ngModel)]="data.configJson.Cmd"></textarea>-->
+  <!--</mat-form-field>-->
+  <!--<br>-->
+
+  <!--<span>Stdin/Stout: </span><br>-->
+  <!--<mat-form-field>-->
+    <!--<input matInput [(ngModel)]="data.configJson.Tty" placeholder="Tty">-->
+  <!--</mat-form-field>-->
+  <!--<mat-form-field>-->
+    <!--<input matInput [(ngModel)]="data.configJson.OpenStdin" placeholder="OpenSTdin">-->
+  <!--</mat-form-field>-->
+  <!--<br>-->
+
+  <!--<br>-->
+  <!--<span>Ports: </span><br>-->
+  <!--<mat-form-field>-->
+    <!--<textarea matInput [(ngModel)]="data.configJson.ExposedPorts"></textarea>-->
+  <!--</mat-form-field>-->
+  <!--<br>-->
+
+
+  <!--<span>Volumes: </span><br>-->
+  <!--<mat-form-field>-->
+    <!--<textarea matInput [(ngModel)]="data.configJson.Volumes"></textarea>-->
+  <!--</mat-form-field>-->
+  <!--<br>-->
+
+  <!--<span>Environment variables: </span><br>-->
+  <!--<mat-form-field>-->
+    <!--<textarea matInput [(ngModel)]="data.configJson.Env" style="min-height: 40px;"></textarea>-->
+  <!--</mat-form-field>-->
+  <!--<br>-->
+
+</div>
+
+
+<div mat-dialog-actions style="float: right;">
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+</div>
+

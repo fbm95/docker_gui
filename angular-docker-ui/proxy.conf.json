@@ -1,0 +1,8 @@
+{
+  "/images/*": {
+    "target": "http://172.17.8.101:2376",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}

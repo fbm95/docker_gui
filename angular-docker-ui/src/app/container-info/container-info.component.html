@@ -1,0 +1,76 @@
+<mat-card class="card">
+  <h3>Container Info</h3>
+  <mat-card-actions style="width:100%; display: flex; justify-content: left; margin-left: 0px;">
+    <button mat-button style="background-color: #f5f5f5;" (click)="startContainer(id)">Start container</button>
+    <button mat-button style="background-color: #f5f5f5;" (click)="stopContainer(id)">Stop container</button>
+    <button mat-button style="background-color: #f5f5f5;" (click)="removeContainer(id)">Remove container</button>
+  </mat-card-actions>
+  <mat-card-content>
+
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="table-layout: fixed; width:100%;">
+      <tbody>
+      <tr>
+        <td class="mdl-data-table__cell--non-numeric">Name: </td>
+        <td class="mdl-data-table__cell--non-numeric">{{name}}</td>
+      </tr>
+      <tr>
+        <td class="mdl-data-table__cell--non-numeric">Id: </td>
+        <td class="mdl-data-table__cell--non-numeric">{{id}}</td>
+      </tr>
+      <tr>
+        <td class="mdl-data-table__cell--non-numeric">Status: </td>
+        <td class="mdl-data-table__cell--non-numeric">{{status}}</td>
+      </tr>
+      <tr>
+        <td class="mdl-data-table__cell--non-numeric">Image: </td>
+        <td class="mdl-data-table__cell--non-numeric">{{image}}</td>
+      </tr>
+      </tbody>
+    </table>
+
+  </mat-card-content>
+
+</mat-card>
+
+<mat-card class="card">
+  <mat-card-content>
+
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="table-layout: fixed; width:100%;" >
+      <tbody>
+      <tr>
+        <td class="mdl-data-table__cell--non-numeric">Port mapping: </td>
+        <td class="mdl-data-table__cell--non-numeric">{{portMapping}}</td>
+      </tr>
+      <tr>
+        <td class="mdl-data-table__cell--non-numeric">Container IP: </td>
+        <td class="mdl-data-table__cell--non-numeric">{{containerIp}}</td>
+      </tr>
+      <tr>
+        <td class="mdl-data-table__cell--non-numeric">Links: </td>
+        <td class="mdl-data-table__cell--non-numeric">{{links}}</td>
+      </tr>
+      <tr>
+        <td class="mdl-data-table__cell--non-numeric">Volume: </td>
+        <td class="mdl-data-table__cell--non-numeric">{{volume}}</td>
+      </tr>
+      <tr>
+        <td class="mdl-data-table__cell--non-numeric">Command: </td>
+        <td class="mdl-data-table__cell--non-numeric">{{command}}</td>
+      </tr>
+      <tr>
+        <td class="mdl-data-table__cell--non-numeric">Arguments: </td>
+        <td class="mdl-data-table__cell--non-numeric">{{arguments}}</td>
+      </tr>
+      <tr>
+        <td class="mdl-data-table__cell--non-numeric">Environment: </td>
+        <td class="mdl-data-table__cell--non-numeric">
+        <ul>
+          <li *ngFor="let i of environment" style="list-style: none; word-wrap: break-word;">{{i}}<br><br></li>
+        </ul>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+  </mat-card-content>
+</mat-card>

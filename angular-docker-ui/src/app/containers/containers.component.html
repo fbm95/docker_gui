@@ -1,0 +1,41 @@
+<div class="containers-container mat-elevation-z8" >
+  <span style="color: #369; font-family: Arial, Helvetica, sans-serif; font-size: 150%; margin-top: 5px; margin-bottom: 5px; margin-left:10px;">My containers</span>
+  <mat-table class="mat-table" #table [dataSource]="historyContainers">
+    <ng-container matColumnDef="logo">
+      <mat-header-cell *matHeaderCellDef style="max-width: 60px;"></mat-header-cell>
+      <mat-cell *matCellDef="let element" style="max-width: 60px;">
+        <img src="../../assets/icons/container.png" style=" max-width: 50px;"/>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Id">
+      <mat-header-cell *matHeaderCellDef > Container Id </mat-header-cell>
+      <mat-cell *matCellDef="let element" (click)="getContainerInfo('container/'+ element.Id)" style="cursor: pointer; color: #369;"> {{element.Id | slice: 0:12}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Names">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.Names}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Image">
+      <mat-header-cell *matHeaderCellDef> Image </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.Image}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="ImageID">
+      <mat-header-cell *matHeaderCellDef> ImageID </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.ImageID | slice: 0:12}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Status">
+      <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.Status}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="historyColumns" ></mat-header-row>
+    <mat-row *matRowDef="let row; columns: historyColumns;"></mat-row>
+  </mat-table>
+
+
+</div>

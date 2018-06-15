@@ -1,0 +1,37 @@
+<h3>
+  Swarm nodes
+</h3>
+<h4>
+  Services and Tasks
+</h4>
+<mat-card  *ngFor="let node of nodes | reverse" style="display: flex;">
+  <div style="min-width: 300px;">
+    <p style="font-weight: bold;">Role: {{node.Spec.Role}}</p>
+    <p>Availability: {{node.Spec.Availability}}</p>
+    <p>ID: {{node.ID}}</p>
+    <p>Hostname: {{node.Description.Hostname}}</p>
+    <p>Architecture: {{node.Description.Platform.Architecture}}</p>
+    <p>OS: {{node.Description.Platform.OS}}</p>
+    <p>CPUs: {{node.Description.Resources.NanoCPUs/1000000000}}</p>
+    <p>Memory: {{node.Description.Resources.MemoryBytes | fileSize: GB}}</p>
+    <p>State: {{node.Status.State}}</p>
+    <p>IP: {{node.Status.Addr}}</p>
+  </div>
+  <div>
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="table-layout: fixed; width:100%;">
+      <tbody>
+      <tr *ngFor="let task of node.Tasks">
+        <td class="mdl-data-table__cell--non-numeric">
+          <span style="font-weight: bold;">ServiceID:</span> <span>{{task.ServiceID | slice: 0:12}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+          <span style="font-weight: bold;">State:</span> {{task.Status.State}}&nbsp;&nbsp;&nbsp;&nbsp;
+          <span style="font-weight: bold;">Message:</span> {{task.Status.Message}}&nbsp;&nbsp;&nbsp;&nbsp;
+          <span style="font-weight: bold;">TaskID:</span><span> {{task.ID | slice: 0:12}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+          <span style="font-weight: bold;">ContainerID:</span> <span style="cursor: pointer; color: #369;" (click)="getContainerInfo('container/'+ task.Status.ContainerStatus.ContainerID)">{{task.Status.ContainerStatus.ContainerID | slice: 0:12}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+          <span style="font-weight: bold;">ImageID:</span> <span>{{task.Spec.ContainerSpec.Image | slice: 0:12}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+          <span style="font-weight: bold;" style="cursor: pointer; color: #369;" (click)="deleteService(task.ServiceID)">Delete Service</span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</mat-card>

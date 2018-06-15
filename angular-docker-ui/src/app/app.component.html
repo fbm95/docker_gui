@@ -1,0 +1,9 @@
+<div [class.loader-hidden]="!loading">
+  <div class="loader-overlay">
+    <div>
+      <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+    </div>
+  </div>
+</div>
+<app-header></app-header>
+<router-outlet></router-outlet>

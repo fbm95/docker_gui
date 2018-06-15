@@ -1,0 +1,111 @@
+<div class="search-box-wrapper">
+  <mat-form-field class="search-box-full-width">
+    <input matInput placeholder="Search Images ..." [(ngModel)]="query" (keyup.enter)="search(1)">
+  </mat-form-field>
+  <button mat-raised-button class="search-button" (click)="search(1)">Search</button>
+</div>
+
+<div class="images-container mat-elevation-z8" *ngIf="repoImages" style="margin-bottom: 10px;">
+  <span style="color: #369; font-family: Arial, Helvetica, sans-serif; font-size: 150%; margin-top: 5px; margin-bottom: 5px; margin-left:10px;">Docker Hub Images</span>
+
+  <mat-table class="mat-table" #table [dataSource]="repoImages">
+
+    <ng-container matColumnDef="logo">
+      <mat-header-cell *matHeaderCellDef style="max-width: 60px;"></mat-header-cell>
+      <mat-cell *matCellDef="let element" style="background-color: #369; max-width: 60px;">
+        <img src="../../assets/icons/mini-docker-logo.png" />
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="repo_name">
+      <mat-header-cell *matHeaderCellDef > Repo name </mat-header-cell>
+      <mat-cell *matCellDef="let element" > {{element.repo_name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="short_description">
+      <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.short_description}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="star_count">
+      <mat-header-cell *matHeaderCellDef> Star count </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.star_count}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="pull_count">
+      <mat-header-cell *matHeaderCellDef> Pull count </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.pull_count}} times </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="is_automated">
+      <mat-header-cell *matHeaderCellDef> Is automated </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.is_automated}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="is_official">
+      <mat-header-cell *matHeaderCellDef> Is official </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.is_official}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="pull_image">
+      <mat-header-cell *matHeaderCellDef> Pull image </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+
+          <img src="../../assets/icons/pull_image.png" class="action_image_style" (click) = "download(element.repo_name)"/>
+
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="repoColumns" ></mat-header-row>
+    <mat-row *matRowDef="let row; columns: repoColumns;"></mat-row>
+  </mat-table>
+  <div class="pagination-container">
+    <img src="../../assets/icons/previous.png" class="pagination" (click)="getPreviousPage()"/>
+    <span style="margin-top: 7px;">{{this.imagesService.page}}</span>
+    <img src="../../assets/icons/next.png" class="pagination" (click)="getNextPage()"/>
+  </div>
+</div>
+
+<div class="images-container mat-elevation-z8" *ngIf="dockerImages">
+  <span style="color: #369; font-family: Arial, Helvetica, sans-serif; font-size: 150%; margin-top: 5px; margin-bottom: 5px; margin-left:10px;">Local Images</span>
+  <mat-table class="mat-table" #table [dataSource]="dockerImages">
+    <ng-container matColumnDef="logo">
+      <mat-header-cell *matHeaderCellDef style="max-width: 60px;"></mat-header-cell>
+      <mat-cell *matCellDef="let element" style="background-color: #369; max-width: 60px;">
+        <img src="../../assets/icons/mini-docker-logo.png" />
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Id">
+      <mat-header-cell *matHeaderCellDef > Id </mat-header-cell>
+      <mat-cell *matCellDef="let element" (click)="getImageInfo('image/'+ element.Id)" style="cursor: pointer; color: #369;"> {{element.Id | slice: 0:12}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="RepoTags">
+      <mat-header-cell *matHeaderCellDef> Tags </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.RepoTags}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Created">
+      <mat-header-cell *matHeaderCellDef> Created </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.Created}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="VirtualSize">
+      <mat-header-cell *matHeaderCellDef> Size </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.VirtualSize/1000000 | number : '.0-2'}} MB </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="remove_image">
+      <mat-header-cell *matHeaderCellDef> Remove image </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+          <img src="../../assets/icons/remove.png" class="action_image_style" (click) = "delete(element.Id)"/>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="dockerColumns" ></mat-header-row>
+    <mat-row *matRowDef="let row; columns: dockerColumns;"></mat-row>
+  </mat-table>
+
+
+</div>

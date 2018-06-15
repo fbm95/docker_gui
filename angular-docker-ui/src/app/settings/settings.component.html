@@ -1,0 +1,80 @@
+<!--<button mat-raised-button (click)="isLinear = true" id="toggle-linear">Enable linear mode</button>-->
+
+<mat-horizontal-stepper [linear]="isLinear" #stepper="matHorizontalStepper">
+
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Enter Docker server IP</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="0.0.0.0" formControlName="firstCtrl" required [(ngModel)]="ip">
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Enter Docker server Port</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="Port" formControlName="secondCtrl" required [(ngModel)]="port">
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <div>
+      <span *ngIf="dataSource" style="display: inline-flex;">
+        <img src="../../assets/icons/valid_connection.png" class="icon-small"/>
+        <span style="margin-top:5px;">&nbsp;&nbsp;You are now connected.</span>
+      </span>
+      <span *ngIf="!dataSource"  style="display: inline-flex;">
+        <img src="../../assets/icons/invalid_connection.png" class="icon-small"/>
+        <span style="margin-top:5px;">&nbsp;&nbsp;Click the connect button.</span>
+      </span>
+
+    </div>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="connect()">Connect</button>
+      <button mat-button (click)="stepper.reset(); reset();">Reset</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
+
+<span *ngIf="dataSource">
+  <div class="table-container mat-elevation-z8">
+    <mat-table class="mat-table" #table [dataSource]="dataSource">
+      <ng-container matColumnDef="position">
+        <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="value">
+        <mat-header-cell *matHeaderCellDef> Value </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.value}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+</span>
+
+<span *ngIf="error" class="error">
+  <img src="../../assets/images/error.png" />
+  <p>
+  {{error | json}}
+  </p>
+</span>
